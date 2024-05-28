@@ -1,7 +1,12 @@
-export default function TextList({ texts }) {
+import { useSelector } from "react-redux";
+
+export default function TextList() {
+  const listValue = useSelector((state) => state.texts);
+  const textValue = listValue.text;
+
   return (
     <ul>
-      {texts.map((text, index) => (
+      {textValue.map((text, index) => (
         <li key={index}>{text}</li>
       ))}
     </ul>

@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import TextInput from "./components/TextInput";
 import TextList from "./components/TextList";
 
 function App() {
-  // TODO: texts 를 context api 로 리팩터링 하세요.
-  const [texts, setTexts] = useState(() =>
-    localStorage.getItem("texts")
-      ? JSON.parse(localStorage.getItem("texts"))
-      : [],
-  );
+  const texts = useSelector((state) => state.texts); //texts 구독
 
   useEffect(() => {
     localStorage.setItem("texts", JSON.stringify(texts));
   }, [texts]);
 
-  const onAddText = (text) => {
-    setTexts((prevTexts) => [...prevTexts, text]);
-  };
+  console.log(texts);
 
   return (
     <div>
       <h1>Text Input and Listing</h1>
-      <TextInput onAddText={onAddText} />
-      <TextList texts={texts} />
+      <TextInput />
+      <TextList />
     </div>
   );
 }

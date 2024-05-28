@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-function TextInput({ onAddText }) {
+function TextInput() {
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (e) => {
@@ -10,7 +12,8 @@ function TextInput({ onAddText }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      onAddText(inputValue);
+      // onAddText(inputValue);
+      dispatch({ type: "onAddText", payload: inputValue });
       setInputValue("");
     }
   };
